@@ -8,7 +8,7 @@ function TaskList({data}){
         <>
         <div id='taskList' className="h-[55%] overflow-x-auto py-5 w-full flex items-center justify-start gap-5 flex-nowrap  mt-10">
             {
-                data.tasks.map((val,i)=>{
+                data?.tasks?.map((val,i)=>{
                     if(val.active){
                         return <AcceptTasks key={i} data={val} />
                     }

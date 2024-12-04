@@ -20,7 +20,7 @@ function AllTasks(){
             
             {
 
-                authData.employees.map((val,i)=>{
+                authData?.employees?.map((val,i)=>{
                     return <div key={i} className=" border border-emerald-400 bg-black mb-2 py-2 px-4 flex justify-between rounded">
                         <h2 className="w-1/5 text-lg font-medium ">{val.name}</h2>
                         <h3 className="w-1/5 text-lg font-medium text-blue-600">{val.taskNumbers.newTask}</h3>
