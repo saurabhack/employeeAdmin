@@ -19,14 +19,14 @@ function App(){
 // },[authData])
   // console.log("authentication data ===",employees)
 
-// useEffect(()=>{
-//   const loggedInUser=localStorage.getItem('loggedInUser')
-//   if(loggedInUser){
-//     const userData=JSON.parse(loggedInUser)
-//     setUser(userData.role)
-//     setLoggedInUserData(userData.data)
-//   }
-// },[])
+useEffect(()=>{
+  const loggedInUser=localStorage.getItem('loggedInUser')
+  if(loggedInUser){
+    const userData=JSON.parse(loggedInUser)
+    setUser(userData.role)
+    setLoggedInUserData(userData.data)
+  }
+},[])
 
 console.log("authenticated data===",authData)
 function handleLogin(email,password){
@@ -36,7 +36,7 @@ function handleLogin(email,password){
 
       }
      else if(authData ){
-      const employee= authData.employees.find((e)=>{return email == e.email}) && authData.employees.find((e)=>{return password == e.password})
+      const employee= authData?.employees?.find((e)=>{return email == e.email && password == e.password})
       if(employee){
         setUser({role:'employee'})
       localStorage.setItem('loggedInUser',JSON.stringify({role:'employee',data:employee}))
