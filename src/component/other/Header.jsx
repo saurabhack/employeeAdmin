@@ -5,6 +5,7 @@ function Header({data}){
         localStorage.setItem('loggedInUser','')
         window.location.reload()
     }
+
     return(
         <>
         <div className="flex justify-between items-center">

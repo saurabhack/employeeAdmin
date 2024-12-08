@@ -79,7 +79,7 @@ const employees = [
         date: "2023-09-30",
         category: "Marketing",
         active: false,
-        newTask: true,
+        newTask: false,
         completed: false,
         failed: true
       },

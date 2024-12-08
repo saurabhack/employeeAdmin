@@ -4,6 +4,7 @@ import FailedTask from "./FailedTasks";
 import NewTask from "./NewTasks";
 
 function TaskList({data}){
+    console.log("data",data)
     return(
         <>
         <div id='taskList' className="h-[55%] overflow-x-auto py-5 w-full flex items-center justify-start gap-5 flex-nowrap  mt-10">

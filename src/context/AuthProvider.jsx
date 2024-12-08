@@ -5,15 +5,21 @@ export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
 
+    // setLocalStorage()
+    const [userData, setUserData] = useState([]);
+    const logout=()=>{
+        localStorage.setItem('loggedInUser','')
+        window.location.reload()
+    }
+    
 
-    const [userData, setUserData] = useState(null);
     useEffect(() => {
-        const { employees, admin } = getLocalStorage();
-        setUserData({ employees, admin });
+        const {employees} = getLocalStorage();
+        setUserData( employees );
     }, []);
-
+    
     return (
-        <AuthContext.Provider value={userData}>
+        <AuthContext.Provider value={[userData,setUserData]}>
             {children}
         </AuthContext.Provider>
     );

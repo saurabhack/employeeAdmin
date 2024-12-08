@@ -5,52 +5,52 @@ import { useContext, useEffect, useState } from "react"
 import { getLocalStorage, setLocalStorage } from "./utils/LocalStorage"
 import { AuthContext } from "./context/AuthProvider"
 function App(){
-  const [user,setUser]=useState(null)
-  const [loggedInUserData,setLoggedInUserData]=useState()
-  const authData=useContext(AuthContext)
-  
-// useEffect(()=>{
-//   if(authData){
-//     const loggedInUser=localStorage.getItem('loggedInUser')
-//     if(loggedInUser){
-//       setUser(loggedInUser)
-//     }
-//   }
-// },[authData])
-  // console.log("authentication data ===",employees)
+  const [user, setUser] = useState("");
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
+  const [userData] = useContext(AuthContext);
+  // console.log("function is here===",logout())
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const parsedUser = JSON.parse(loggedInUser);
+      setUser(parsedUser.role);
+      setLoggedInUserData(parsedUser.data);
+    }
+  }, []);
 
-useEffect(()=>{
-  const loggedInUser=localStorage.getItem('loggedInUser')
-  if(loggedInUser){
-    const userData=JSON.parse(loggedInUser)
-    setUser(userData.role)
-    setLoggedInUserData(userData.data)
-  }
-},[])
-
-console.log("authenticated data===",authData)
-function handleLogin(email,password){
-      if(email=="admin@gmail.com" && password==123){
-        setUser('admin')
-        localStorage.setItem('loggedInUser',JSON.stringify({role:'admin'}))
-
-      }
-     else if(authData ){
-      const employee= authData?.employees?.find((e)=>{return email == e.email && password == e.password})
-      if(employee){
-        setUser({role:'employee'})
-      localStorage.setItem('loggedInUser',JSON.stringify({role:'employee',data:employee}))
-      setLoggedInUserData(employee)
-      }      
-    }else{
-      console.log("invalid credintials")
+console.log("data of employees",userData)
+// console.log("authenticated data===",authData)
+function handleLogin(email, password) {
+  if (email === "admin@gmail.com" && password === "123") {
+    setUser("admin");
+    localStorage.setItem(
+      "loggedInUser",
+      JSON.stringify({ role: "admin" })
+    );
+  } else if (userData[0]) {
+    const employee = userData.find(
+      (e) => e.email === email && e.password === password
+    );
+    if (employee) {
+      setUser({ role: "employee" });
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({ role: "employee", data: employee })
+      );
+      setLoggedInUserData(employee);
+    } else {
+      console.log("invalid credintials please try again later")
     }
   }
+}
 handleLogin()
 console.log("user====",user)
 
   return(
     <>
+    {
+      console.log("user===",user)
+    }
     <div className="">
       {
         
